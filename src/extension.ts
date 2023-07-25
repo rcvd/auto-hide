@@ -128,7 +128,12 @@ function onload({ extensionAPI }: OnloadArgs) {
 
     showOrHide(extensionAPI);
 }
-
+function onunload() {
+    if (document.getElementById("auto-hide")) {
+        document.getElementById("auto-hide").remove();
+    }
+}
 export default {
     onload: onload,
+    onunload: onunload
 };
