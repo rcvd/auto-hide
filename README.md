@@ -2,6 +2,9 @@
 
 Auto Hide is a module for [Roam Research](https://roamresearch.com) that hides the topbar when you scroll down. 
 
+![Auto Hide in action](https://github.com/rcvd/auto-hide/raw/main/autohide.gif)
+
+
 ## If you want to support my work
 
 - [Become a GitHub Sponsor](https://github.com/sponsors/rcvd)

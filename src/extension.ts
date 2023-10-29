@@ -1,7 +1,7 @@
 import {OnloadArgs} from "roamjs-components/types";
 
 function setTopbarBackground(extensionAPI, topbarBackgroundColor) {
-    let bgColor = "var(--bc-topbar, "+topbarBackgroundColor+");";
+    let bgColor = "var(--bc-topbar, " + topbarBackgroundColor + ");";
 
     console.log(bgColor);
 
@@ -15,6 +15,7 @@ function setTopbarBackground(extensionAPI, topbarBackgroundColor) {
     style.textContent = `.rm-topbar { background-color: ${bgColor} !important;}`;
     head.appendChild(style);
 }
+
 function showTopBar(topbar1: HTMLElement, topbar2: HTMLElement) {
     if (topbar1 && topbar2) {
         topbar1.style.top = '0px';
@@ -28,6 +29,7 @@ function hideTopBar(topbar1: HTMLElement, topbar2: HTMLElement) {
         topbar2.style.opacity = '0';
     }
 }
+
 function showOrHide(extensionAPI) {
     const element = document.querySelector<HTMLElement>(".rm-article-wrapper");
     const topbar1 = document.querySelector<HTMLElement>(".rm-files-dropzone");
@@ -65,7 +67,7 @@ function showOrHide(extensionAPI) {
         }
         if (element.scrollTop < oldY && extensionAPI.settings.get("showOnScrollUp")) {
             showTopBar(topbar1, topbar2);
-            isHidden=false;
+            isHidden = false;
         }
         oldY = element.scrollTop;
     }
@@ -82,7 +84,7 @@ function setSettingDefault(extensionAPI: any, settingId: any, settingDefault: an
     return storedSetting || settingDefault;
 }
 
-function onload({ extensionAPI }: OnloadArgs) {
+function onload({extensionAPI}: OnloadArgs) {
     const observer = new MutationObserver(handleMutations);
     const targetElements = document.querySelectorAll('.roam-main');
 
@@ -109,7 +111,9 @@ function onload({ extensionAPI }: OnloadArgs) {
                 action: {
                     type: "input",
                     placeholder: "#fff",
-                    onChange: (evt) => { setTopbarBackground(extensionAPI, evt.target.value); }
+                    onChange: (evt) => {
+                        setTopbarBackground(extensionAPI, evt.target.value);
+                    }
                 }
             },
         ]
@@ -122,17 +126,19 @@ function onload({ extensionAPI }: OnloadArgs) {
     }
 
     targetElements.forEach((targetElement) => {
-        const config = { attributes: false, childList: true, subtree: false };
+        const config = {attributes: false, childList: true, subtree: false};
         observer.observe(targetElement, config);
     });
 
     showOrHide(extensionAPI);
 }
+
 function onunload() {
     if (document.getElementById("auto-hide")) {
         document.getElementById("auto-hide").remove();
     }
 }
+
 export default {
     onload: onload,
     onunload: onunload
